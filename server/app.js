@@ -7,6 +7,8 @@ var dotenv = require('dotenv');
 dotenv.config();
 
 var users = require('./routes/user.route');
+var auth = require('./routes/auth.route');
+var note = require('./routes/note.route');
 
 var MongoURL = process.env.MONGO_URL;
 mongoose.connect(MongoURL,
@@ -26,5 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/users', users);
+app.use('/api/auth', auth);
+app.use('/api/notes', note);
 
 module.exports = app;
