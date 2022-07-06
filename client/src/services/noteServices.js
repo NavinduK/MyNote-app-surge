@@ -25,7 +25,7 @@ const updateNote = (id, data, token) => {
 };
 
 const deleteNote = (id, token) => {
-    return api.put(`/notes/delete/${id}`,{
+    return api.delete(`/notes/delete/${id}`,{
         headers: {
             'Authorization': token
         }

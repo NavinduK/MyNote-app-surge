@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -8,8 +8,8 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../actions'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router'
-import { useEffect } from 'react';
-import AddModel from './AddModel';
+import AddModel from './AddNoteModel';
+import UpdateModel from './UpdateNoteModel';
 
 const Button = styled.button`
   border-radius: 40px;
@@ -29,7 +29,12 @@ export default function Notes() {
     const { fetchNotes } = bindActionCreators(actions, dispatch);
     const navigate = useNavigate();
 
-    const [open, setOpen] = useState(false);
+    const [open1, setOpen1] = useState(false);
+    const [open2, setOpen2] = useState(false);
+
+    const [updateData, setUpdateData] = useState({
+        id: '', title: '', description: ''
+    });
 
     useEffect(() => {
         fetchNotes(JSON.parse(localStorage.getItem("token")));
@@ -38,12 +43,13 @@ export default function Notes() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={{ xs: 12, md: 3 }} columns={{ xs: 12, sm: 12, md: 12 }}>
-                <Button onClick={()=>setOpen(true)}>Add a note</Button>
+                <Button onClick={() => setOpen1(true)}>Add a note</Button>
                 {notes && notes.data.map((data, index) => (
-                    <Note key={index} note={data} />
+                    <Note key={index} note={data} setOpen={setOpen2} setUpdateData={setUpdateData} />
                 ))}
             </Grid>
-            <AddModel open={open} setOpen={setOpen} />
+            <AddModel open={open1} setOpen={setOpen1} />
+            <UpdateModel open={open2} setOpen={setOpen2} updateData={updateData} setUpdateData={setUpdateData} />
         </Box>
     );
 }

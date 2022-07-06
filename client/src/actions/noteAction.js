@@ -47,7 +47,7 @@ export const addNote = (note, token) => async (dispatch) => {
 export const updateNote = (noteId, user, token) => async (dispatch) => {
     try {
         await noteServices.updateNote(noteId, user, token);
-        const notes = await userServices.getNotes(token);
+        const notes = await noteServices.getNotes(token);
         dispatch({
             type: UPDATE_NOTE,
             payload: notes.data,
@@ -65,7 +65,7 @@ export const updateNote = (noteId, user, token) => async (dispatch) => {
 export const deleteNote = (id, token) => async (dispatch) => {
     try {
         await noteServices.deleteNote(id, token);
-        const notes = await userServices.getNotes(token);
+        const notes = await noteServices.getNotes(token);
         dispatch({
             type: DELETE_NOTE,
             payload: notes.data,
