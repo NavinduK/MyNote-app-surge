@@ -4,6 +4,23 @@ var Note = require('../models/note.model');
 var User = require('../models/user.model');
 const jwtValidator = require("../util/jwtValidator");
 
+
+//GET user with notes populated by token
+router.get('/', function (req, res) {
+    const token = req.get('Authorization');
+    console.log("Token"+token);
+    const userId = validateToken(token);
+    //Add Note and the Note id to the User
+    if (userId) {
+        User.findById(userId, '-salt -password', (err, user) => {
+            if (err) { return res.status(500).json({ msg: 'ERROR_FETCH_NOTE_BY_ID' }); }
+            return res.status(200).json({ data: user.notes });
+        }).populate('notes');
+    } else
+        return res.status(500).json({ msg: 'LOGIN_VALIDATION_FAILED' });
+    
+});
+
 // Add a note
 router.post('/add', function (req, res) {
     const token = req.get('Authorization');

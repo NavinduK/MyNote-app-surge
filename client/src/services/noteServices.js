@@ -1,5 +1,13 @@
 import { api } from "./api";
 
+const getNotes = (token) => {
+    return api.get(`/notes`,{
+        headers: {
+            'Authorization': token
+        }
+    });
+};
+
 const addNote = (data, token) => {
     return api.post(`/notes/add`, data, {
         headers: {
@@ -25,7 +33,7 @@ const deleteNote = (id, token) => {
 };
 
 const noteServices = {
-    addNote, updateNote, deleteNote
+    addNote, updateNote, deleteNote,getNotes
 };
 
 export default noteServices;

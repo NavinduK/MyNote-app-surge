@@ -11,9 +11,9 @@ import {
 import userServices from "../services/userServices";
 import noteServices from '../services/noteServices';
 
-export const fetchNotes = (id) => async (dispatch) => {
+export const fetchNotes = (token) => async (dispatch) => {
     try {
-        const res = await userServices.getNotesById(id);
+        const res = await noteServices.getNotes(token);
         dispatch({
             type: FETCH_USER_NOTE,
             payload: res.data,
@@ -29,7 +29,7 @@ export const fetchNotes = (id) => async (dispatch) => {
 export const addNote = (note, token) => async (dispatch) => {
     try {
         await noteServices.addNote(note,token);
-        const notes = await userServices.getNotes(token);
+        const notes = await noteServices.getNotes(token);
         dispatch({
             type: ADD_NOTE,
             payload: notes.data,

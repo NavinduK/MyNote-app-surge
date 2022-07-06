@@ -8,13 +8,6 @@ const getById = (id) => {
     return api.get(`/users/${id}`);
 };
 
-const getNotes = (token) => {
-    return api.get(`/notes`,{
-        headers: {
-            'Authorization': token
-        }
-    });
-};
 
 const addUser = (data) => {
     return api.post(`/users/add`, data);
@@ -33,7 +26,7 @@ const deleteUser = (id) => {
 };
 
 const userServices = {
-    getAll, getById, getNotes, addUser, updateUser, updatePass, deleteUser
+    getAll, getById, addUser, updateUser, updatePass, deleteUser
 };
 
 export default userServices;

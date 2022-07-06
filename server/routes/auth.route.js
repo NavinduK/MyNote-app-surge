@@ -12,9 +12,9 @@ router.post('/login', function (req, res, next) {
     if (err) return res.status(500).json(err);
     console.log(profile);
     if (!profile) {
-      res.status(400).json({ msg: 'INVALID_USER' });
+      res.status(400).json({ msg: 'Email not registered!' });
     } else if (!profile.validPassword(pw)) {
-      res.status(400).json({ msg: 'INVALID_PW' });
+      res.status(400).json({ msg: 'Password not match!' });
     } else {
       const payload = {
         userId: profile._id,
