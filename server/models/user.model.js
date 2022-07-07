@@ -8,10 +8,10 @@ var user = new mongoose.Schema({
     email: { type: String, unique: true },
     dateOfBirth: Date,
     mobile: Number,
-    status: Boolean,
+    status: {type: Boolean, default: false},
     salt: String,
     password: String,
-    accountType: String,
+    accountType: {type: String, default: 'user'},
     notes: [{type: mongoose.Schema.ObjectId, ref: 'Note'}],
 });
 

@@ -1,6 +1,6 @@
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-
+import AdminDashboard from "./pages/AdminDashboard";
 import {
   BrowserRouter,
   Routes,
@@ -13,6 +13,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home/>}></Route>
         <Route path="/login" element={<Login/>} />
+        <Route path="/admin" element={<AdminDashboard/>} />
       </Routes>
     </BrowserRouter>
   );

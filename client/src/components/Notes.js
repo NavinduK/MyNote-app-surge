@@ -6,7 +6,6 @@ import Note from "./SingleNote";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 import * as actions from '../actions'
-import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router'
 import AddModel from './AddNoteModel';
 import UpdateModel from './UpdateNoteModel';
@@ -42,7 +41,7 @@ export default function Notes() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={{ xs: 12, md: 3 }} columns={{ xs: 12, sm: 12, md: 12 }}>
+            <Grid container spacing={{md: 0 }}>
                 <Button onClick={() => setOpen1(true)}>Add a note</Button>
                 {notes && notes.data.map((data, index) => (
                     <Note key={index} note={data} setOpen={setOpen2} setUpdateData={setUpdateData} />

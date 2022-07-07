@@ -48,7 +48,8 @@ export const fetchUserById = (id) => async (dispatch) => {
 
 export const addUser = (user) => async (dispatch) => {
     try {
-        const res = await userServices.addUser(user);
+        await userServices.addUser(user);
+        const res = await userServices.getAll();
         dispatch({
             type: ADD_USERS,
             payload: res.data,

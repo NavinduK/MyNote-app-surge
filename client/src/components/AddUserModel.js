@@ -34,32 +34,35 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-const TextArea = styled.textarea`
-  flex: 1;
-  min-width: 40%;
+const Error = styled.p`
+  text-align: center;
   margin: 10px 0;
-  padding: 10px;
+  color: red;
 `;
 
-const UpdateNoteModel = ({ open, setOpen, updateData, setUpdateData }) => {
+const AddUserModel = ({ open, setOpen }) => {
+    const [error, setError] = useState();
     const dispatch = useDispatch();
-    const { updateNote } = bindActionCreators(actions, dispatch);
+    const { addUser } = bindActionCreators(actions, dispatch);
 
     const handleClose = () => {
         setOpen(false);
+        setError("");
     };
 
     const { handleSubmit } = useForm({
         mode: "onBlur"
     });
 
-    const onUpdateNote = (data, event) => {
+    const onAdddUser = (data, event) => {
         event.preventDefault();
         let formData = new FormData(event.target);
-        let noteEvent = Object.fromEntries(formData.entries());
-        updateNote(updateData.id, noteEvent, JSON.parse(localStorage.getItem('token'))).then((res) => {
+        let userEvent = Object.fromEntries(formData.entries());
+        addUser(userEvent).then((res) => {
             setOpen(false);
+            setError("");
         }).catch((err) => {
+            setError("Something wrong, Try again!" && err.response.data.msg);
             console.log(err);
         })
     }
@@ -73,17 +76,15 @@ const UpdateNoteModel = ({ open, setOpen, updateData, setUpdateData }) => {
                 aria-describedby="parent-modal-description"
             >
                 <Box sx={{ ...style, width: 400 }}>
-                    <h2 id="parent-modal-title">Update A Note</h2>
+                    <h2 id="parent-modal-title">Add New User</h2>
                     <div id="parent-modal-description">
-                        <Form onSubmit={handleSubmit(onUpdateNote)}>
-                            <Input onChange={(e) => setUpdateData(prev => ({ ...prev, title: e.target.value }))}
-                                required type="text" name="title" placeholder="Title" value={updateData.title}
-                            />
-                            <TextArea onChange={(e) => setUpdateData(prev => ({ ...prev, description: e.target.value }))}
-                                required type="text" rows="6" name="description" value={updateData.description}
-                                placeholder="Description"
-                            />
-                            <Button type="submit">Update Note</Button>
+                        <Form onSubmit={handleSubmit(onAdddUser)}>
+                            <Input required type="email" name="email" placeholder="Email" />
+                            <Input required type="password" name="password" placeholder="Password" />
+                            {error ?
+                                <Error>{error}</Error> : <></>
+                            }
+                            <Button type="submit">Add User</Button>
                             <Button onClick={handleClose}>Close</Button>
                         </Form>
                     </div>
@@ -93,4 +94,4 @@ const UpdateNoteModel = ({ open, setOpen, updateData, setUpdateData }) => {
     );
 }
 
-export default UpdateNoteModel;
+export default AddUserModel;

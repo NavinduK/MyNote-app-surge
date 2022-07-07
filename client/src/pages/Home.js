@@ -16,10 +16,7 @@ const Wrapper = styled.div`
   ${mobile({ width: "75%" })}
 `;
 
-
 const Home = () => {
- 
-
     return (
         <Container>
             <Wrapper>

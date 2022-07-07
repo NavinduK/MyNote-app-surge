@@ -24,7 +24,6 @@ const reducer = (state = initialState, action) => {
             };
         case FETCH_USERS_ERROR:
             return {
-                allUsers: [],
                 error: action.payload,
             };
         case FETCH_USER_ID:
@@ -34,17 +33,16 @@ const reducer = (state = initialState, action) => {
             };
         case FETCH_USER_ID_ERROR:
             return {
-                user: '',
                 error: action.payload,
             };
         case ADD_USERS:
             return {
-                allUsers: [...state.allUsers, action.payload],
+                allUsers: action.payload,
                 error: '',
             };
         case ADD_USERS_ERROR:
             return {
-                allUsers: [],
+                allUsers: state.allUsers,
                 error: action.payload,
             };
         case UPDATE_USER:
@@ -54,7 +52,6 @@ const reducer = (state = initialState, action) => {
             };
         case UPDATE_USER_ERROR:
             return {
-                user: '',
                 error: action.payload,
             };
         case UPDATE_USER_PASS:
@@ -64,7 +61,6 @@ const reducer = (state = initialState, action) => {
             };
         case UPDATE_USER_PASS_ERROR:
             return {
-                user: '',
                 error: action.payload,
             };
         default:

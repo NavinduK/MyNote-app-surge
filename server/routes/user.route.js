@@ -18,8 +18,8 @@ router.post('/add', function (req, res, next) {
     user.save(function (err, data) {
         if (err) {
             if (err.code == 11000)
-                return res.status(400).json({ msg: 'DUPLICATE_EMAIL', data: err });
-            return res.status(500).json({ msg: 'ERROR_ADDING_USER', data: err });
+                return res.status(400).json({ msg: 'Email Already Registered!', data: err });
+            return res.status(500).json({ msg: 'Try Again!', data: err });
         } else
             return res.status(200).json({ data: data });
     });
