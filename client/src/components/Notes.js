@@ -42,7 +42,7 @@ export default function Notes() {
             <Grid container spacing={{ md: 0 }}>
                 <Button onClick={() => setOpen1(true)}>Add a note</Button>
                 <Grid container justifyContent="center" spacing={1}>
-                    {notes && (notes.data > 0 ? notes.data.map((data, index) => (
+                    {notes && (notes.data.length > 0 ? notes.data.map((data, index) => (
                         <Note key={index} note={data} setOpen={setOpen2} setUpdateData={setUpdateData} />
                     )) : <h3 style={{ marginTop: "80px", marginLeft:"15px" }}>No Notes Added!</h3>)
                     }
