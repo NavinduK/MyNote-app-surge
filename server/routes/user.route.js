@@ -12,7 +12,7 @@ router.get('/:id', function (req, res) {
 });
 
 // Add a user
-router.post('/add', function (req, res, next) {
+router.post('/add', function (req, res) {
     var user = new User(req.body);
     user.setPassword(req.body.password);
     user.save(function (err, data) {
@@ -26,7 +26,7 @@ router.post('/add', function (req, res, next) {
 });
 
 //Update a user
-router.put('/update/:id', function (req, res, next) {
+router.put('/update/:id', function (req, res) {
     User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true },
         function (err, user) {
             if (err) {
@@ -39,7 +39,7 @@ router.put('/update/:id', function (req, res, next) {
 });
 
 //Update password
-router.put('/update-pass/:id', function (req, res, next) {
+router.put('/update-pass/:id', function (req, res) {
     var user = new User();
     user.setPassword(req.body.password);
     var body = {
@@ -56,7 +56,7 @@ router.put('/update-pass/:id', function (req, res, next) {
 });
 
 //Delete a user
-router.delete('/delete/:id', function (req, res, next) {
+router.delete('/delete/:id', function (req, res) {
     User.findOneAndDelete({ _id: req.params.id },
         function (err, user) {
             if (err) return res.status(500).json({ msg: 'ERROR_DELETING_USER', data: err });
@@ -65,7 +65,7 @@ router.delete('/delete/:id', function (req, res, next) {
 });
 
 //Get all users
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     User.find({},'-salt -password', (err, user) => {
         if (err) { return res.status(500).json({ msg: 'ERROR_FETCH_USERS', data: err }); }
         console.log(user)

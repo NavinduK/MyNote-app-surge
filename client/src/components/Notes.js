@@ -6,7 +6,6 @@ import Note from "./SingleNote";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 import * as actions from '../actions'
-import { useNavigate } from 'react-router'
 import AddModel from './AddNoteModel';
 import UpdateModel from './UpdateNoteModel';
 
@@ -26,7 +25,6 @@ export default function Notes() {
     const notes = useSelector((state) => state.notes.notes);
     const dispatch = useDispatch();
     const { fetchNotes } = bindActionCreators(actions, dispatch);
-    const navigate = useNavigate();
 
     const [open1, setOpen1] = useState(false);
     const [open2, setOpen2] = useState(false);
@@ -41,11 +39,14 @@ export default function Notes() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={{md: 0 }}>
+            <Grid container spacing={{ md: 0 }}>
                 <Button onClick={() => setOpen1(true)}>Add a note</Button>
-                {notes && notes.data.map((data, index) => (
-                    <Note key={index} note={data} setOpen={setOpen2} setUpdateData={setUpdateData} />
-                ))}
+                <Grid container justifyContent="center" spacing={1}>
+                    {notes && (notes.data > 0 ? notes.data.map((data, index) => (
+                        <Note key={index} note={data} setOpen={setOpen2} setUpdateData={setUpdateData} />
+                    )) : <h3 style={{ marginTop: "80px", marginLeft:"15px" }}>No Notes Added!</h3>)
+                    }
+                </Grid>
             </Grid>
             <AddModel open={open1} setOpen={setOpen1} />
             <UpdateModel open={open2} setOpen={setOpen2} updateData={updateData} setUpdateData={setUpdateData} />

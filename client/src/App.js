@@ -6,16 +6,27 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoutes/ProtectedRoute";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Home/>}></Route>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/admin" element={<AdminDashboard/>} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path='/' element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />
+          <Route exact path='/admin' element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

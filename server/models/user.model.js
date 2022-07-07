@@ -18,12 +18,10 @@ var user = new mongoose.Schema({
 user.methods.setPassword = function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
     this.password = crypto.pbkdf2Sync(password, this.salt, 250, 64, 'sha512').toString('hex');
-    console.log(this.salt + ", " + this.password);
 }
 
 user.methods.validPassword = function (password) {
     var hash = crypto.pbkdf2Sync(password, this.salt, 250, 64, 'sha512').toString('hex');
-    console.log(this.password === hash);
     return this.password === hash;
 };
 

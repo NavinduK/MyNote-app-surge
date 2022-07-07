@@ -13,7 +13,7 @@ var note = require('./routes/note.route');
 var MongoURL = process.env.MONGO_URL;
 mongoose.connect(MongoURL,
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-    , (err, db) => {
+    , (err) => {
         if (err) return console.log(err);
         global.db = mongoose.connection;
         global.db.on('error', console.error.bind(console, 'MongoDB connection error:'));

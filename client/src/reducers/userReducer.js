@@ -8,9 +8,7 @@ import {
     UPDATE_USER,
     UPDATE_USER_ERROR,
     UPDATE_USER_PASS,
-    UPDATE_USER_PASS_ERROR,
-    DELETE_USER,
-    DELETE_USER_ERROR
+    UPDATE_USER_PASS_ERROR
 } from '../actions/types'
 
 const initialState = {}

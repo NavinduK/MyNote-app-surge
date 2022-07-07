@@ -1,11 +1,15 @@
 import { api } from "./api";
 
 const login = (data) => {
-    return api.post(`/auth/login`,data);
+    return api.post(`/auth/login`, data);
 };
 
-const validate = () => {
-    return api.get(`/auth/validate`);
+const validate = (token) => {
+    return api.get(`/auth/validate`, {
+        headers: {
+            'Authorization': token
+        }
+    });
 };
 
 const authServices = {

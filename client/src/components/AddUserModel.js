@@ -58,7 +58,7 @@ const AddUserModel = ({ open, setOpen }) => {
         event.preventDefault();
         let formData = new FormData(event.target);
         let userEvent = Object.fromEntries(formData.entries());
-        addUser(userEvent).then((res) => {
+        addUser(userEvent).then(() => {
             setOpen(false);
             setError("");
         }).catch((err) => {

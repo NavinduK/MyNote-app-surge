@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../actions'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router'
-import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -63,10 +62,6 @@ const Button = styled.button`
 
 `;
 
-const Reg = styled.span`
-  font-size: 12px;
-  cursor: pointer;
-`;
 
 const Error = styled.p`
   text-align: center;
@@ -150,7 +145,6 @@ const Login = () => {
                             <Error>{error}</Error> : <></>
                         }
                         <Button type="submit">NEXT</Button>
-                        <Link style={{ margin: '10px auto 0 auto', textDecoration: 'none' }} to={"/signup"}><Reg>CANCEL</Reg></Link>
                     </Form>
                 </Wrapper>)
                 : content === 3 ?
@@ -165,7 +159,6 @@ const Login = () => {
                                 <Error>{error}</Error> : <></>
                             }
                             <Button type="submit">FINISH</Button>
-                            <Link style={{ margin: '10px auto 0 auto', textDecoration: 'none' }} to={"/signup"}><Reg>CANCEL</Reg></Link>
                         </Form>
                     </Wrapper>)
                     :
@@ -178,7 +171,6 @@ const Login = () => {
                                 <Error>{error}</Error> : <></>
                             }
                             <Button type="submit">LOGIN</Button>
-                            <Link style={{ margin: '10px auto 0 auto', textDecoration: 'none' }} to={"/signup"}><Reg>CANCEL</Reg></Link>
                         </Form>
                     </Wrapper>)
             }

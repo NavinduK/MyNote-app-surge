@@ -13,11 +13,13 @@ export const validate = (token) => async (dispatch) => {
             type: VALIDATION,
             payload: res.data,
         });
+        return Promise.resolve(res.data);
     } catch (err) {
         dispatch({
             type: VALIDATION_ERROR,
             payload: err,
         });
+        return Promise.reject(err);
     }
 };
 

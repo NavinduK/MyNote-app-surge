@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
@@ -57,7 +57,7 @@ const AddModel = ({ open, setOpen }) => {
         event.preventDefault();
         let formData = new FormData(event.target);
         let noteEvent = Object.fromEntries(formData.entries());
-        addNote(noteEvent,JSON.parse(localStorage.getItem('token'))).then((res) => {
+        addNote(noteEvent,JSON.parse(localStorage.getItem('token'))).then(() => {
             setOpen(false);
         }).catch((err) => {
             console.log(err);

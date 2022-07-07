@@ -5,7 +5,7 @@ var config = require('../util/config')
 var User = require('../models/user.model');
 
 // Login Route
-router.post('/login', function (req, res, next) {
+router.post('/login', function (req, res) {
   var email = req.body.email;
   var pw = req.body.password;
   User.findOne({ 'email': email }, function (err, profile) {
@@ -35,7 +35,7 @@ router.post('/login', function (req, res, next) {
 });
 
 //Validate user token
-router.get('/validate', function (req, res, next) {
+router.get('/validate', function (req, res) {
   var token = req.get('Authorization');
   console.log(token);
   if (token) {

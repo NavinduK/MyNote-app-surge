@@ -4,7 +4,6 @@ var Note = require('../models/note.model');
 var User = require('../models/user.model');
 const jwtValidator = require("../util/jwtValidator");
 
-
 //GET user with notes populated by token
 router.get('/', function (req, res) {
     const token = req.get('Authorization');
@@ -18,7 +17,6 @@ router.get('/', function (req, res) {
         }).populate('notes');
     } else
         return res.status(500).json({ msg: 'LOGIN_VALIDATION_FAILED' });
-    
 });
 
 // Add a note
@@ -35,7 +33,7 @@ router.post('/add', function (req, res) {
                 if (error)
                     return res.status(500).json({ msg: 'ERROR_ADDING_NOTE', data: error });
                 user.notes.push(noteData._id);
-                user.save(function (error2, userData) {
+                user.save(function (error2) {
                     if (error2)
                         return res.status(500).json({ msg: 'ERROR_ADDING_NOTE_TO_USER', data: error2 });
                     return res.status(200).json({ data: noteData });
@@ -71,8 +69,8 @@ router.delete('/delete/:noteId', function (req, res) {
             if (err)
                 return res.status(500).json({ msg: 'ERROR_FIND_USER', data: err });
             Note.findOneAndDelete({ _id: req.params.noteId },
-                function (err, note) {
-                    if (err)
+                function (err2, note) {
+                    if (err2)
                         return res.status(500).json({ msg: 'ERROR_DELETING_NOTE', data: err });
                     user.notes.splice(user.notes.indexOf(note._id), 1);
                     user.save();

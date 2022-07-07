@@ -8,7 +8,6 @@ import {
     DELETE_NOTE,
     DELETE_NOTE_ERROR
 } from './types';
-import userServices from "../services/userServices";
 import noteServices from '../services/noteServices';
 
 export const fetchNotes = (token) => async (dispatch) => {

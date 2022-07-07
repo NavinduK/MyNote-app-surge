@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import Notes from "../components/Notes";
+import Navbar from "../components/NavBar";
 
 const Container = styled.div`
   width: 100vw;
@@ -18,11 +19,14 @@ const Wrapper = styled.div`
 
 const Home = () => {
     return (
+        <>
+        <Navbar />
         <Container>
             <Wrapper>
                 <Notes/>
             </Wrapper>
         </Container>
+        </>
     );
 };
 
